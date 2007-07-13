@@ -1,0 +1,30 @@
+-*- outline -*-
+
+* Dependencies
+The aggregate-plugin depends on following libraries and programs:
+
+** dlvhex
+Naturally, dlvhex must already be installed on the system.
+
+
+* Building and installing dlvhex-aggregateplugin
+
+** Prerequisites
+
+*** dlvhex
+For instructions how to install dlvhex, see the respective README there.
+
+** Configuration
+Run "configure" to create the necessary Makefiles. If you want to install the
+plugin locally in your home, use the configure-switch --enable-userinstall
+(then, the plugin will be installed in ~/.dlvhex/plugins, where dlvhex will
+find it). Otherwise, the default installation is automatically determined from
+the configuration of dlvhex (usually /usr/local/lib/dlvhex/plugins or similar).
+
+** Installation
+Run "make install" to install the plugin. It will be placed at a location
+determined by configure.
+
+* Using the aggregate-plugin
+
+tbd.
