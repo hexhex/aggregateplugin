@@ -3,7 +3,7 @@ AC_PREREQ([2.59])
 AC_INIT([dlvhex-aggregateplugin],[0.1.0],[roman@kr.tuwien.ac.at])
 
 # this refers to one of the sources, change it if you renamed the file
-AC_CONFIG_SRCDIR([src/pluginInterface.cpp])
+AC_CONFIG_SRCDIR([src/PluginInterface.cpp])
 
 AC_CONFIG_HEADER([src/config.h])
 
@@ -75,6 +75,7 @@ AC_SUBST([plugindir])
 #
 AC_CONFIG_FILES([
            Makefile 
+           include/Makefile
            src/Makefile
 ])
 
