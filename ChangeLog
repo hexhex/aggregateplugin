@@ -1,0 +1,4 @@
+2007-07-17  Roman Schindlauer  <roman@kr.tuwien.ac.at>
+
+	* testsuite/Makefile.am: Fixed testsuite bug.
+

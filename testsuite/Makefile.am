@@ -9,5 +9,5 @@ EXTRA_DIST = \
 
 TESTS = run-dlvhex-tests.sh
 
-TESTS_ENVIRONMENT = TESTDIR=$(top_srcdir)/testsuite DLVHEX=dlvhex PARAMETERS="-s --plugindir=$(top_srcdir)/src/.libs"
+TESTS_ENVIRONMENT = TESTDIR=$(top_srcdir)/testsuite DLVHEX=dlvhex PARAMETERS="-s --plugindir=$(top_builddir)/src/.libs"
 
