@@ -1,5 +1,5 @@
 /* dlvhex-aggregateplugin -- aggregate atoms for hex-programs.
- * Copyright (C) 2005, 2006, 2007 Roman Schindlauer
+ * Copyright (C) 2007 Roman Schindlauer
  * 
  * dlvhex-aggregateplugin is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  */
 
 /**
- * @file   PluginInterface.h
+ * @file   AggPluginInterface.cpp
  * @author Roman Schindlauer
  * @date   Fri Jul 13 16:36:09 CEST 2007
  * 
@@ -27,78 +27,132 @@
  */
 
 
-#include "PluginInterface.h"
+#include "AggPluginInterface.h"
+#include "dlvhex/PrintVisitor.h"
 
-minAtom::minAtom()
+
+
+AggAtom::AggAtom()
 {
-	//
-	// let's say, this atom has one constant input parameter...
-	//
-	addInputConstant();
-
-	//
-	// ...and one predicate...
-	//
 	addInputPredicate();
+	addInputTuple();
 
-	//
-	// ...and the output is unary.
-	//
 	setOutputArity(1);
 }
 
 
 void
-minAtom::retrieve(const Query& query, Answer& answer) throw (PluginError)
+AggAtom::projectInput(const AtomSet& i, const Tuple& mask)
 {
-	//
-	// dlvhex will call this function for evaluating the external
-	// atom. Whatever is done inside here, is up to the user.
-	//
+	this->projection.clear();
+
+	AtomSet::const_iterator cur = i.begin();
+	AtomSet::const_iterator last = i.end();
 
 	//
-	// let's get the constant of the first input argument:
+	// go through all atoms of the interpretation
 	//
+	while (cur != last)
+	{
+		Atom a = *cur;
 
-	std::string in;
+		if (a.getArity() != mask.size())
+			throw PluginError("Aggregate mask does not correspond to predicate arity!");
 
-	in = query.getInputTuple()[0].getUnquotedString();
+		bool drop(0);
 
-	//
-	// and the second one, it's a predicate name:
-	//
+		Tuple newarg;
 
-	std::string pred = query.getInputTuple()[1].getUnquotedString();
+		newarg.push_back(a.getPredicate());
 
-	//
-	// take the interpretation:
-	//
+		for (Tuple::size_type pos = 0; pos < mask.size(); pos++)
+		{
+			if (mask[pos].getUnquotedString() == "mask")
+			{
+				newarg.push_back(a.getArgument(pos+1));
+			}
+			else
+			if (mask[pos] != a.getArgument(pos+1))
+				drop = 1;
+		}
 
-	AtomSet i = query.getInterpretation();
+		if (!drop)
+		{
+			AtomPtr ap(new Atom(newarg));
+			this->projection.insert(ap);
+		}
 
-	//
-	// do something with i, pred and in...
-	//
-
-	//
-	// ...and prepare the atom's output:
-	//
-
-	std::vector<Tuple> out;
-
-	//
-	// fill the answer object...
-	//
-
-	answer.addTuples(out);
+		cur++;
+	}
 }
+
+
+void
+AggAtom::retrieve(const Query& query, Answer& answer) throw (PluginError)
+{
+	Tuple inputTuple = query.getInputTuple();
+
+	//
+	// we don't need the predicate name at the beginning of the input tuple any more,
+	// the interpretation is already filtered
+	//
+	inputTuple.erase(inputTuple.begin());
+
+	this->projectInput(query.getInterpretation(), inputTuple);
+
+//	RawPrintVisitor rpv(std::cerr);
+//	this->projection.accept(rpv);
+
+	Term res;
+	this->calculateAggfun(res);
+
+	Tuple out;
+
+	out.push_back(res);
+
+	answer.addTuple(out);
+}
+
+
+void
+AggAtom::calculateAggfun(Term& t) const
+{
+}
+
+
+MinAtom::MinAtom()
+	: AggAtom()
+{
+}
+
+void
+MinAtom::calculateAggfun(Term& t) const
+{
+	t = Term("foo");
+}
+
+
+
+CountAtom::CountAtom()
+	: AggAtom()
+{
+}
+
+
+void
+CountAtom::calculateAggfun(Term& t) const
+{
+	t = Term(this->projection.size());
+}
+
 
 
 
 void
 AggregatePlugin::getAtoms(AtomFunctionMap& a)
 {
-	a["min"] = new minAtom;
+	a["min"] = new MinAtom;
+	a["count"] = new CountAtom;
 }
 
 

@@ -17,7 +17,7 @@
  */
 
 /**
- * @file   PluginInterface.h
+ * @file   AggPluginInterface.h
  * @author Roman Schindlauer
  * @date   Fri Jul 13 16:36:09 CEST 2007
  * 
@@ -38,15 +38,69 @@
 #include <string>
 
 
-class minAtom : public PluginAtom
+/**
+ * @brief Base class for Aggregate Atoms.
+ */
+class AggAtom : public PluginAtom
 {
 public:
-
-    minAtom();
+	AggAtom();
 
     virtual void
     retrieve(const Query& query, Answer& answer) throw (PluginError);
 
+protected:
+
+	/**
+	 * @brief Extension of input predicate after masking.
+	 */
+	AtomSet projection;
+
+private:
+
+	/**
+	 * @brief Virtual base class for all aggregate functions.
+	 */
+	virtual void
+	calculateAggfun(Term&) const;
+
+	/**
+	 * @brief Reduction of input predicate extension to non-masked arguments.
+	 */
+	void
+	projectInput(const AtomSet&, const Tuple&);
+};
+
+
+/**
+ * @brief Minimum Aggregate Atom.
+ */
+class MinAtom : public AggAtom
+{
+public:
+
+    MinAtom();
+
+private:
+
+	virtual void
+	calculateAggfun(Term&) const;
+};
+
+
+/**
+ * @brief Count Aggregate Atom.
+ */
+class CountAtom : public AggAtom
+{
+public:
+
+    CountAtom();
+
+private:
+
+	virtual void
+	calculateAggfun(Term&) const;
 };
 
 
