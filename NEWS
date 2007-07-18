@@ -1,1 +1,4 @@
-tbd
+Version 0.1.0 - Jul 18 2007, by Roman Schindlauer
+
+    - Implemented &count, &min, and &max.
+    - Added testsuite.

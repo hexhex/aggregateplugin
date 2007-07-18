@@ -1,5 +1,4 @@
 min(X) :- &min[p,mask](X).
-count(X) :- &count[p,mask](X).
 p(a).
 p(b).
 p(c).

@@ -89,6 +89,22 @@ private:
 
 
 /**
+ * @brief Maximum Aggregate Atom.
+ */
+class MaxAtom : public AggAtom
+{
+public:
+
+    MaxAtom();
+
+private:
+
+	virtual void
+	calculateAggfun(Term&) const;
+};
+
+
+/**
  * @brief Count Aggregate Atom.
  */
 class CountAtom : public AggAtom

@@ -1,0 +1,7 @@
+min(X) :- &min[p,mask,e,mask](X).
+p(y,e,b).
+p(b,f,u).
+p(c,e,a).
+q(e).
+q(f).
+g(u).

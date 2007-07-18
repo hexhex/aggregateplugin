@@ -1,3 +1,20 @@
+2007-07-18  Roman Schindlauer  <roman@kr.tuwien.ac.at>
+
+	* include/AggPluginInterface.h: Added min, max.
+	* src/AggPluginInterface.cpp (AggAtom), (getAtoms): Likewise.
+
+	* testsuite/Makefile.am: Added testfiles.
+	* testsuite/aggregates.test: Likewise.
+
+	* testsuite/min1.hex: Added.
+	* testsuite/min1.out: Added.
+	* testsuite/min2.hex: Added.
+	* testsuite/min2.out: Added.
+	* testsuite/minmax1.hex: Added.
+	* testsuite/minmax1.out: Added.
+
+	* NEWS: Added info.
+
 2007-07-17  Roman Schindlauer  <roman@kr.tuwien.ac.at>
 
 	* testsuite/Makefile.am: Fixed testsuite bug.

@@ -120,6 +120,7 @@ AggAtom::calculateAggfun(Term& t) const
 }
 
 
+
 MinAtom::MinAtom()
 	: AggAtom()
 {
@@ -128,7 +129,71 @@ MinAtom::MinAtom()
 void
 MinAtom::calculateAggfun(Term& t) const
 {
-	t = Term("foo");
+	// hack: start with variable
+	Term min("X");
+
+	AtomSet::const_iterator cur = projection.begin();
+	AtomSet::const_iterator last = projection.end();
+
+	//
+	// go through all atoms of the interpretation
+	//
+	while (cur != last)
+	{
+		Atom a = *cur;
+
+		for (Tuple::size_type pos = 1; pos <= a.getArity(); pos++)
+		{
+			// first term - no comparison possible
+			if (min.isVariable())
+				min = a.getArgument(pos);
+			else
+			if (a.getArgument(pos).getString() < min.getString())
+				min = a.getArgument(pos);
+		}
+
+		cur++;
+	}
+
+	t = min;
+}
+
+
+MaxAtom::MaxAtom()
+	: AggAtom()
+{
+}
+
+void
+MaxAtom::calculateAggfun(Term& t) const
+{
+	// hack: start with variable
+	Term max("X");
+
+	AtomSet::const_iterator cur = projection.begin();
+	AtomSet::const_iterator last = projection.end();
+
+	//
+	// go through all atoms of the interpretation
+	//
+	while (cur != last)
+	{
+		Atom a = *cur;
+
+		for (Tuple::size_type pos = 1; pos <= a.getArity(); pos++)
+		{
+			// first term - no comparison possible
+			if (max.isVariable())
+				max = a.getArgument(pos);
+			else
+			if (a.getArgument(pos).getString() > max.getString())
+				max = a.getArgument(pos);
+		}
+
+		cur++;
+	}
+
+	t = max;
 }
 
 
@@ -152,6 +217,7 @@ void
 AggregatePlugin::getAtoms(AtomFunctionMap& a)
 {
 	a["min"] = new MinAtom;
+	a["max"] = new MaxAtom;
 	a["count"] = new CountAtom;
 }
 
