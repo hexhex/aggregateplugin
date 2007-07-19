@@ -1,6 +1,8 @@
 /* dlvhex-aggregateplugin -- aggregate atoms for hex-programs.
  * Copyright (C) 2005, 2006, 2007 Roman Schindlauer
  * 
+ * This file is part of dlvhex-aggregateplugin.
+ *
  * dlvhex-aggregateplugin is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or (at your
@@ -55,6 +57,11 @@ protected:
 	 * @brief Extension of input predicate after masking.
 	 */
 	AtomSet projection;
+
+	/**
+	 * @brief Constant mask term for projecting the input extension.
+	 */
+	const Term MASKTERM;
 
 private:
 

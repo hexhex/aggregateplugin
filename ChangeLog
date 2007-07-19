@@ -1,3 +1,10 @@
+2007-07-19  Roman Schindlauer  <roman@kr.tuwien.ac.at>
+
+	* bootstrap.sh: Fixed inclusion of m4 folder.
+	* include/AggPluginInterface.h: Removed hardcoded "mask" id.
+	* src/AggPluginInterface.cpp (MASKTERM), (projectInput): Likewise.
+	* testsuite/run-dlvhex-tests.sh: Fixed plugin lib path.
+
 2007-07-18  Roman Schindlauer  <roman@kr.tuwien.ac.at>
 
 	* include/AggPluginInterface.h: Added min, max.
