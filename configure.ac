@@ -1,11 +1,20 @@
 
 AC_PREREQ([2.59])
-AC_INIT([dlvhex-aggregateplugin],[0.1.0],[roman@kr.tuwien.ac.at])
+AC_INIT([dlvhex-aggregateplugin],[0.2.0],[roman@kr.tuwien.ac.at])
 
 # this refers to one of the sources, change it if you renamed the file
 AC_CONFIG_SRCDIR([src/AggPluginInterface.cpp])
 
 AC_CONFIG_HEADER([src/config.h])
+
+AC_CANONICAL_HOST
+# by default we look into /opt/local and /sw for include files (macports vs. fink)
+case $host_os in
+     darwin*|macosx*)
+	CPPFLAGS="$CPPFLAGS -I/opt/local/include -I/sw/include"
+     ;;
+esac 
+
 
 MAJOR=`echo $PACKAGE_VERSION | sed "s/^\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\1/"`
 MINOR=`echo $PACKAGE_VERSION | sed "s/^\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\2/"`
@@ -56,6 +65,10 @@ DX_INIT_DOXYGEN([dlvhex], [doxygen.cfg], [documentation])
 # of course we need dlvhex itself!
 #
 PKG_CHECK_MODULES([DLVHEX], [dlvhex >= 1.4])
+
+# check for boost
+AC_PATH_BOOST([1.33.0], [], [AC_MSG_ERROR([could not find boost library. Download it at http://www.boost.org/.])])
+
 
 #
 # where the plugin will be installed by default.
