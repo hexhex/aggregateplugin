@@ -1,3 +1,15 @@
+2008-01-09  Thomas Krennwallner  <tkren@kr.tuwien.ac.at>
+
+	* src/AggPluginInterface.cpp: Adapt to new dlvhex plugin API.
+	* include/AggPluginInterface.h: Likewise.
+
+	* m4/boost.m4: New file.
+
+	* configure.ac: Bump version to 0.2.0.
+	Fix boost searching.
+
+	* bootstrap.sh: Use autoreconf.
+
 2007-07-19  Roman Schindlauer  <roman@kr.tuwien.ac.at>
 
 	* bootstrap.sh: Fixed inclusion of m4 folder.
