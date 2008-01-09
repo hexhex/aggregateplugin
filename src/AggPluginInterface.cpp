@@ -28,10 +28,14 @@
  * 
  */
 
-
-#include "AggPluginInterface.h"
 #include "dlvhex/PrintVisitor.h"
 
+#include "AggPluginInterface.h"
+
+#include <iostream>
+
+namespace dlvhex {
+  namespace aggregate {
 
 AggAtom::AggAtom()
 	: MASKTERM("mask")
@@ -218,9 +222,12 @@ CountAtom::calculateAggfun(Term& t) const
 void
 AggregatePlugin::getAtoms(AtomFunctionMap& a)
 {
-	a["min"] = new MinAtom;
-	a["max"] = new MaxAtom;
-	a["count"] = new CountAtom;
+  boost::shared_ptr<PluginAtom> min(new MinAtom);
+  boost::shared_ptr<PluginAtom> max(new MaxAtom);
+  boost::shared_ptr<PluginAtom> count(new CountAtom);
+  a["min"] = min;
+  a["max"] = max;
+  a["count"] = count;
 }
 
 
@@ -280,15 +287,18 @@ AggregatePlugin::setOptions(bool doHelp, std::vector<std::string>& argv, std::os
 
 AggregatePlugin theAggregatePlugin;
 
+  } // namespace aggregate
+} // namespace dlvhex
+
 extern "C"
-AggregatePlugin*
+dlvhex::aggregate::AggregatePlugin*
 PLUGINIMPORTFUNCTION()
 {
-    theAggregatePlugin.setVersion(AGGREGATEPLUGIN_MAJOR,
-                                  AGGREGATEPLUGIN_MINOR,
-                                  AGGREGATEPLUGIN_MICRO);
+  dlvhex::aggregate::theAggregatePlugin.setVersion(AGGREGATEPLUGIN_MAJOR,
+						   AGGREGATEPLUGIN_MINOR,
+						   AGGREGATEPLUGIN_MICRO);
 
-    return &theAggregatePlugin;
+  return &dlvhex::aggregate::theAggregatePlugin;
 }
 
 

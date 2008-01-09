@@ -39,6 +39,8 @@
 
 #include <string>
 
+namespace dlvhex {
+  namespace aggregate {
 
 /**
  * @brief Base class for Aggregate Atoms.
@@ -139,6 +141,10 @@ public:
     setOptions(bool doHelp, std::vector<std::string>& argv, std::ostream& out);
 
 };
+
+
+  } // namespace aggregate
+} // namespace dlvhex
 
 #endif // _AGGPLUGININTERFACE_H
 
