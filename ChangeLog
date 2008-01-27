@@ -1,3 +1,7 @@
+2008-01-27  Thomas Krennwallner  <tkren@kr.tuwien.ac.at>
+
+	* src/AggPluginInterface.cpp: Set plugin name.
+
 2008-01-09  Thomas Krennwallner  <tkren@kr.tuwien.ac.at>
 
 	* src/AggPluginInterface.cpp: Adapt to new dlvhex plugin API.
