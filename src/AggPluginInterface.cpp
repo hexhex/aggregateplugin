@@ -28,6 +28,10 @@
  * 
  */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "dlvhex/PrintVisitor.h"
 
 #include "AggPluginInterface.h"
@@ -294,6 +298,7 @@ extern "C"
 dlvhex::aggregate::AggregatePlugin*
 PLUGINIMPORTFUNCTION()
 {
+  dlvhex::aggregate::theAggregatePlugin.setPluginName(PACKAGE_TARNAME);
   dlvhex::aggregate::theAggregatePlugin.setVersion(AGGREGATEPLUGIN_MAJOR,
 						   AGGREGATEPLUGIN_MINOR,
 						   AGGREGATEPLUGIN_MICRO);
