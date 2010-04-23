@@ -1,3 +1,11 @@
+2010-04-23  Thomas Krennwallner  <tkren@kr.tuwien.ac.at>
+
+	* testsuite/Makefile.am (AUTOMAKE_OPTIONS): Remove.
+	* src/Makefile.am: Likewise.
+	* include/Makefile.am: Likewise.
+
+	* Makefile.am (AUTOMAKE_OPTIONS): Use gnu instead of foreign.
+
 2009-09-23  Thomas Krennwallner  <tkren@kr.tuwien.ac.at>
 
 	* m4/boost.m4: Fix for autoconf 2.64 (see also
