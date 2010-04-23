@@ -1,5 +1,3 @@
-AUTOMAKE_OPTIONS = foreign
-
 plugin_LTLIBRARIES = libdlvhexaggregateplugin.la
 
 libdlvhexaggregateplugin_la_SOURCES = AggPluginInterface.cpp

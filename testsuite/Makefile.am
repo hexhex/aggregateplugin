@@ -1,5 +1,3 @@
-AUTOMAKE_OPTIONS = gnu
-
 EXTRA_DIST = \
     aggregates.test \
     count1.hex \
