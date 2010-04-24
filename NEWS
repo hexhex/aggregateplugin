@@ -1,4 +1,6 @@
-Version 0.1.0 - Jul 18 2007, by Roman Schindlauer
+dlvhex-aggregateplugin NEWS -- history of user-visible changes.
 
-    - Implemented &count, &min, and &max.
-    - Added testsuite.
+Version 0.1.0 (Jul 18 2007)
+
+* Implemented &count, &min, and &max.
+* Added testsuite.
