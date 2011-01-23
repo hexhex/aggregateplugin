@@ -1,3 +1,11 @@
+2010-10-11  Thomas Krennwallner  <tkren@kr.tuwien.ac.at>
+
+	* NEWS: Fix content.
+
+	* configure.ac: Bump version to 1.7.1.
+
+	* m4/boost.m4: Merged with dlvhex trunk.
+
 2010-06-22  Thomas Krennwallner  <tkren@kr.tuwien.ac.at>
 
 	Release version 1.7.0.
