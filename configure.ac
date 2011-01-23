@@ -1,6 +1,6 @@
 
 AC_PREREQ([2.61])
-AC_INIT([dlvhex-aggregateplugin],[1.7.0],[roman@kr.tuwien.ac.at])
+AC_INIT([dlvhex-aggregateplugin],[1.7.2],[dlvhex-devel@lists.sourceforge.net])
 
 # this refers to one of the sources, change it if you renamed the file
 AC_CONFIG_SRCDIR([src/AggPluginInterface.cpp])
