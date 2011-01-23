@@ -1,6 +1,21 @@
 dlvhex-aggregateplugin NEWS -- history of user-visible changes.
 
-Version 0.1.0 (Jul 18 2007)
 
-* Implemented &count, &min, and &max.
-* Added testsuite.
+* Version 1.7.0 (July 2010)
+
+** Add proper doxygen support.
+
+** Adapt to dlvhex 1.7 API.
+
+
+* Version 0.1.0 (Jul 18 2007)
+
+** Implemented &count, &min, and &max.
+
+** Added testsuite.
+
+
+Local variables:
+mode: outline
+paragraph-separate: "[ 	]*$"
+end:
