@@ -1,6 +1,10 @@
 plugin_LTLIBRARIES = libdlvhexaggregateplugin.la
 
-libdlvhexaggregateplugin_la_SOURCES = AggPluginInterface.cpp
+libdlvhexaggregateplugin_la_SOURCES = 	AggPlugin.cpp \
+										AggAtom.cpp \
+										MinAtom.cpp \
+										MaxAtom.cpp \
+										CountAtom.cpp
 
 AM_CPPFLAGS = \
 	-I$(top_srcdir)/include \

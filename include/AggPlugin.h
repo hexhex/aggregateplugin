@@ -42,105 +42,17 @@
 namespace dlvhex {
   namespace aggregate {
 
-/**
- * @brief Base class for Aggregate Atoms.
- */
-class AggAtom : public PluginAtom
-{
-public:
-	AggAtom();
+	class AggregatePlugin : public PluginInterface
+	{
+	public:
 
-    virtual void
-    retrieve(const Query& query, Answer& answer) throw (PluginError);
+		virtual void
+		getAtoms(AtomFunctionMap& a);
 
-protected:
+		void
+		setOptions(bool doHelp, std::vector<std::string>& argv, std::ostream& out);
 
-	/**
-	 * @brief Extension of input predicate after masking.
-	 */
-	AtomSet projection;
-
-	/**
-	 * @brief Constant mask term for projecting the input extension.
-	 */
-	const Term MASKTERM;
-
-private:
-
-	/**
-	 * @brief Virtual base class for all aggregate functions.
-	 */
-	virtual void
-	calculateAggfun(Term&) const;
-
-	/**
-	 * @brief Reduction of input predicate extension to non-masked arguments.
-	 */
-	void
-	projectInput(const AtomSet&, const Tuple&);
-};
-
-
-/**
- * @brief Minimum Aggregate Atom.
- */
-class MinAtom : public AggAtom
-{
-public:
-
-    MinAtom();
-
-private:
-
-	virtual void
-	calculateAggfun(Term&) const;
-};
-
-
-/**
- * @brief Maximum Aggregate Atom.
- */
-class MaxAtom : public AggAtom
-{
-public:
-
-    MaxAtom();
-
-private:
-
-	virtual void
-	calculateAggfun(Term&) const;
-};
-
-
-/**
- * @brief Count Aggregate Atom.
- */
-class CountAtom : public AggAtom
-{
-public:
-
-    CountAtom();
-
-private:
-
-	virtual void
-	calculateAggfun(Term&) const;
-};
-
-
-
-class AggregatePlugin : public PluginInterface
-{
-public:
-
-    virtual void
-    getAtoms(AtomFunctionMap& a);
-
-    void
-    setOptions(bool doHelp, std::vector<std::string>& argv, std::ostream& out);
-
-};
+	};
 
 
   } // namespace aggregate
