@@ -46,12 +46,19 @@ namespace dlvhex {
 	{
 	public:
 
+		/*
 		virtual void
 		getAtoms(AtomFunctionMap& a);
 
 		void
 		setOptions(bool doHelp, std::vector<std::string>& argv, std::ostream& out);
+		*/
 
+		AggregatePlugin();
+		~AggregatePlugin(); 
+		std::vector<PluginAtomPtr> createAtoms(ProgramCtx&) const;
+    	void processOptions(std::list<const char*>& pluginOptions, ProgramCtx& ctx);
+		void printUsage(std::ostream& o);
 	};
 
 

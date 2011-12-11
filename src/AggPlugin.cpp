@@ -41,7 +41,32 @@
 namespace dlvhex {
   namespace aggregate {
 
+	AggregatePlugin::AggregatePlugin() {
+		setNameVersion(PACKAGE_TARNAME, AGGREGATEPLUGIN_MAJOR, 
+			AGGREGATEPLUGIN_MINOR, AGGREGATEPLUGIN_MICRO);
+	}
 
+	~AggregatePlugin::AggregatePlugin() {
+
+	}
+
+	std::vector<PluginAtomPtr> AggregatePlugin::createAtoms(ProgramCtx&) const {
+		std::vector<PluginAtomPtr> ret;
+		ret.push_back(PluginAtomPtr(new MinAtom, PluginPtrDeleter<PluginAtom>()));
+		ret.push_back(PluginAtomPtr(new MaxAtom, PluginPtrDeleter<PluginAtom>()));
+		ret.push_back(PluginAtomPtr(new CountAtom, PluginPtrDeleter<PluginAtom>()));
+		return ret;
+	}
+
+	void AggregatePlugin::processOptions(std::list<const char*>& pluginOptions, 
+										ProgramCtx& ctx) {
+	}
+
+	void AggregatePlugin::printUsage(std::ostream& o) {
+		
+	}
+
+	/*
 	void
 	AggregatePlugin::getAtoms(AtomFunctionMap& a)
 	{
@@ -52,8 +77,9 @@ namespace dlvhex {
 	  a["max"] = max;
 	  a["count"] = count;
 	}
+	*/
 
-
+	/*
 	void
 	AggregatePlugin::setOptions(bool doHelp, std::vector<std::string>& argv, std::ostream& out)
 	{
@@ -106,6 +132,7 @@ namespace dlvhex {
 			argv.erase(*it);
 		}
 	}
+	*/
 
 
 	AggregatePlugin theAggregatePlugin;
@@ -113,6 +140,7 @@ namespace dlvhex {
   } // namespace aggregate
 } // namespace dlvhex
 
+/*
 extern "C"
 dlvhex::aggregate::AggregatePlugin*
 PLUGINIMPORTFUNCTION()
@@ -124,7 +152,7 @@ PLUGINIMPORTFUNCTION()
 
   return &dlvhex::aggregate::theAggregatePlugin;
 }
-
+*/
 
 /* vim: set noet sw=4 ts=4 tw=80: */
 
