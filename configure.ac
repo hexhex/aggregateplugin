@@ -3,7 +3,7 @@ AC_PREREQ([2.61])
 AC_INIT([dlvhex-aggregateplugin],[1.7.2],[dlvhex-devel@lists.sourceforge.net])
 
 # this refers to one of the sources, change it if you renamed the file
-AC_CONFIG_SRCDIR([src/AggPluginInterface.cpp])
+AC_CONFIG_SRCDIR([src/AggPlugin.cpp])
 
 AC_CONFIG_HEADER([src/config.h])
 
@@ -92,7 +92,7 @@ AC_CONFIG_FILES([
            Makefile 
            include/Makefile
            src/Makefile
-           testsuite/Makefile
+           examples/Makefile
 ])
 
 AC_OUTPUT
