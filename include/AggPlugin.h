@@ -35,15 +35,14 @@
 #include "config.h"
 #endif /* HAVE_CONFIG_H */
 
-#include "dlvhex/PluginInterface.h"
-
 #include <string>
+
+#include <dlvhex/PluginInterface.h>
 
 namespace dlvhex {
   namespace aggregate {
 
-	class AggregatePlugin : public PluginInterface
-	{
+	class AggregatePlugin : public PluginInterface {
 	public:
 
 		/*
@@ -57,8 +56,6 @@ namespace dlvhex {
 		AggregatePlugin();
 		~AggregatePlugin(); 
 		std::vector<PluginAtomPtr> createAtoms(ProgramCtx&) const;
-    	void processOptions(std::list<const char*>& pluginOptions, ProgramCtx& ctx);
-		void printUsage(std::ostream& o);
 	};
 
 

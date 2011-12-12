@@ -28,15 +28,19 @@
  * 
  */
 
+#include "AggPlugin.h"
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
-#include "dlvhex/PrintVisitor.h"
+// #include "dlvhex/PrintVisitor.h"
 
-#include "AggPlugin.h"
+#include "MinAtom.h"
+#include "MaxAtom.h"
+#include "CountAtom.h"
 
-#include <iostream>
+// #include <iostream>
 
 namespace dlvhex {
   namespace aggregate {
@@ -46,7 +50,7 @@ namespace dlvhex {
 			AGGREGATEPLUGIN_MINOR, AGGREGATEPLUGIN_MICRO);
 	}
 
-	~AggregatePlugin::AggregatePlugin() {
+	AggregatePlugin::~AggregatePlugin() {
 
 	}
 
@@ -56,14 +60,6 @@ namespace dlvhex {
 		ret.push_back(PluginAtomPtr(new MaxAtom, PluginPtrDeleter<PluginAtom>()));
 		ret.push_back(PluginAtomPtr(new CountAtom, PluginPtrDeleter<PluginAtom>()));
 		return ret;
-	}
-
-	void AggregatePlugin::processOptions(std::list<const char*>& pluginOptions, 
-										ProgramCtx& ctx) {
-	}
-
-	void AggregatePlugin::printUsage(std::ostream& o) {
-		
 	}
 
 	/*

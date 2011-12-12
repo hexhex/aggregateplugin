@@ -1,7 +1,7 @@
-#ifndef _AGG_PLUGIN_AGGATOM_H_
-#define _AGG_PLUGIN_AGGATOM_H_
+#ifndef _AGG_PLUGIN_MAXATOM_H_
+#define _AGG_PLUGIN_MAXATOM_H_
 
-#include "dlvhex/PluginInterface.h"
+#include <dlvhex/PluginInterface.h>
 #include "AggAtom.h"
 
 namespace dlvhex {
@@ -24,3 +24,5 @@ namespace dlvhex {
 
   }
 }
+
+#endif 

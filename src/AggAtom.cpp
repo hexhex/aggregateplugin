@@ -1,19 +1,96 @@
 
 #include "AggAtom.h"
 
+#include <dlvhex/Term.hpp>
+#include <dlvhex/Registry.hpp>
+#include <dlvhex/Interpretation.hpp>
+
 namespace dlvhex {
   namespace aggregate {
 
-	AggAtom::AggAtom()
-		: MASKTERM("mask")
-	{
+	// SABINE: OK
+	AggAtom::AggAtom(std::string atomname) : PluginAtom(atomname, 0), 
+		MASKTERM(ID::MAINKIND_TERM | ID::SUBKIND_TERM_CONSTANT, "mask") {
+
 		addInputPredicate();
 		addInputTuple();
 
 		setOutputArity(1);
 	}
 
+	void AggAtom::retrieve(const Query& query, Answer& answer) throw (PluginError) {
+		
+		Registry &registry = *getRegistry();		
 
+		InterpretationConstPtr interp = this->projectInput(query.interpretation, query.input);
+
+		Term &result = this->calculateAggfun(interp);
+
+		Tuple tuple;
+		tuple.push_back(registry.storeTerm(result));
+		answer.get().push_back(tuple);
+	}
+
+	/*
+	void
+	AggAtom::retrieve(const Query& query, Answer& answer) throw (PluginError)
+	{
+		Tuple inputTuple = query.getInputTuple();
+
+		//
+		// we don't need the predicate name at the beginning of the input tuple any more,
+		// the interpretation is already filtered
+		//
+		inputTuple.erase(inputTuple.begin());
+
+		this->projectInput(query.getInterpretation(), inputTuple);
+
+		//	RawPrintVisitor rpv(std::cerr);
+		//	this->projection.accept(rpv);
+
+		Term res;
+		this->calculateAggfun(res);
+
+		Tuple out;
+
+		out.push_back(res);
+
+		answer.addTuple(out);
+	}
+	*/
+	
+	InterpretationConstPtr AggAtom::projectInput(const InterpretationConstPtr interp, const Tuple& mask) {
+
+		//this->projection.clear();
+
+		PredicateMask pm;
+		pm.setRegistry(getRegistry());
+
+		assert(mask[0].isConstantTerm());
+		LOG(DBG, "AggAtom::projectInput: mask = " << mask[0]);
+		pm.addPredicate(mask[0]);
+		pm.updateMask();
+
+		InterpretationPtr interp2(new Interpretation(getRegistry()));
+		interp2.get()->add(*interp.get()); 
+		interp2.get()->bit_and(*pm.mask().get());
+
+		return interp2;
+		
+		/*
+		#warning use TrueBits once it's merged into dlvhex-refactoring		
+		for (Storage::enumerator en = interp.getStorage().first();
+			 en++; en != interp.getStorage().end()) {
+
+			IDAddress adr = *en;
+			pm.addPredicate();
+
+		}
+		*/
+	}
+	
+
+	/*
 	void
 	AggAtom::projectInput(const AtomSet& i, const Tuple& mask)
 	{
@@ -58,38 +135,9 @@ namespace dlvhex {
 			cur++;
 		}
 	}
+	*/
 
-
-	void
-	AggAtom::retrieve(const Query& query, Answer& answer) throw (PluginError)
-	{
-		Tuple inputTuple = query.getInputTuple();
-
-		//
-		// we don't need the predicate name at the beginning of the input tuple any more,
-		// the interpretation is already filtered
-		//
-		inputTuple.erase(inputTuple.begin());
-
-		this->projectInput(query.getInterpretation(), inputTuple);
-
-	//	RawPrintVisitor rpv(std::cerr);
-	//	this->projection.accept(rpv);
-
-		Term res;
-		this->calculateAggfun(res);
-
-		Tuple out;
-
-		out.push_back(res);
-
-		answer.addTuple(out);
-	}
-
-
-	void
-	AggAtom::calculateAggfun(Term& t) const
-	{
+	Term& AggAtom::calculateAggfun(InterpretationConstPtr interp) const {
 
 	}
 
