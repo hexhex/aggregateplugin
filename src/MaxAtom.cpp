@@ -1,16 +1,34 @@
 
 #include "MaxAtom.h"
 
+#include <dlvhex/Interpretation.hpp>
+#include <bm.h>
+
 namespace dlvhex {
   namespace aggregate {
 
-	MaxAtom::MaxAtom()
-		: AggAtom()
-	{
+	MaxAtom::MaxAtom() : AggAtom("max") { }
+	
+	MaxAtom::~MaxAtom() { }
 
-	}
-
-	void
+	ID CountAtom::calculateAggfun(InterpretationConstPtr interp, 
+								  const Tuple& input) 			 const {
+		
+		Registry& registry = interp->get()->getRegistry()->get();
+		Storage storage = interp->get()->getStorage();
+		Storage::enumerator en = storage->first();
+		
+		while (en.value() < storage.size()) {
+			
+			// TODO
+			
+			
+			
+			en++;
+		}
+	}	
+	
+	void 
 	MaxAtom::calculateAggfun(Term& t) const
 	{
 		// hack: start with variable

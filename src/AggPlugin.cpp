@@ -36,8 +36,8 @@
 
 // #include "dlvhex/PrintVisitor.h"
 
-#include "MinAtom.h"
-#include "MaxAtom.h"
+//#include "MinAtom.h"
+//#include "MaxAtom.h"
 #include "CountAtom.h"
 
 // #include <iostream>
@@ -56,8 +56,8 @@ namespace dlvhex {
 
 	std::vector<PluginAtomPtr> AggregatePlugin::createAtoms(ProgramCtx&) const {
 		std::vector<PluginAtomPtr> ret;
-		ret.push_back(PluginAtomPtr(new MinAtom, PluginPtrDeleter<PluginAtom>()));
-		ret.push_back(PluginAtomPtr(new MaxAtom, PluginPtrDeleter<PluginAtom>()));
+		//ret.push_back(PluginAtomPtr(new MinAtom, PluginPtrDeleter<PluginAtom>()));
+		//ret.push_back(PluginAtomPtr(new MaxAtom, PluginPtrDeleter<PluginAtom>()));
 		ret.push_back(PluginAtomPtr(new CountAtom, PluginPtrDeleter<PluginAtom>()));
 		return ret;
 	}
@@ -149,6 +149,10 @@ PLUGINIMPORTFUNCTION()
   return &dlvhex::aggregate::theAggregatePlugin;
 }
 */
+extern "C"
+void *PLUGINIMPORTFUNCTION() {
+	return reinterpret_cast<void*>(& dlvhex::aggregate::theAggregatePlugin);
+}
 
 /* vim: set noet sw=4 ts=4 tw=80: */
 

@@ -4,8 +4,7 @@
 namespace dlvhex {
   namespace aggregate {
 
-	MinAtom::MinAtom()
-		: AggAtom()
+	MinAtom::MinAtom() : AggAtom("min")
 	{
 
 	}

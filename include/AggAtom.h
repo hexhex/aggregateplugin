@@ -23,7 +23,6 @@ namespace dlvhex {
 		 * @brief Extension of input predicate after masking.
 		 */
 		//AtomSet projection;
-		InterpretationConstPtr projection;
 
 		/**
 		 * @brief Constant mask term for projecting the input extension.
@@ -35,7 +34,7 @@ namespace dlvhex {
 		/**
 		 * @brief Virtual base class for all aggregate functions.
 		 */
-		virtual Term& calculateAggfun(InterpretationConstPtr) const;
+		virtual ID calculateAggfun(InterpretationConstPtr, const Tuple&) const = 0;
 
 		/**
 		 * @brief Reduction of input predicate extension to non-masked arguments.
