@@ -1,8 +1,10 @@
 #ifndef _AGG_PLUGIN_MINATOM_H_
 #define _AGG_PLUGIN_MINATOM_H_
 
-#include <dlvhex/PluginInterface.h>
+//#include <dlvhex/PluginInterface.h>
 #include "AggAtom.h"
+
+#include <dlvhex/Interpretation.hpp>
 
 namespace dlvhex {
   namespace aggregate {
@@ -10,16 +12,12 @@ namespace dlvhex {
 	/**
 	 * @brief Minimum Aggregate Atom.
 	 */
-	class MinAtom : public AggAtom
-	{
+	class MinAtom : public AggAtom {
 	public:
-
 		MinAtom();
-
+		~MinAtom();
 	private:
-
-		virtual void
-		calculateAggfun(Term&) const;
+		virtual ID calculateAggfun(InterpretationConstPtr);
 	};
 
   }

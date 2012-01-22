@@ -1,8 +1,10 @@
 #ifndef _AGG_PLUGIN_MAXATOM_H_
 #define _AGG_PLUGIN_MAXATOM_H_
 
-#include <dlvhex/PluginInterface.h>
+//#include <dlvhex/PluginInterface.h>
 #include "AggAtom.h"
+
+#include <dlvhex/Interpretation.hpp>
 
 namespace dlvhex {
   namespace aggregate {
@@ -10,16 +12,12 @@ namespace dlvhex {
 	/**
 	 * @brief Maximum Aggregate Atom.
 	 */
-	class MaxAtom : public AggAtom
-	{
+	class MaxAtom : public AggAtom {
 	public:
-
 		MaxAtom();
-
+		~MaxAtom();
 	private:
-
-		virtual void
-		calculateAggfun(Term&) const;
+		virtual ID calculateAggfun(InterpretationConstPtr) const;
 	};
 
   }

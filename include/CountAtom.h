@@ -1,8 +1,10 @@
 #ifndef _AGG_PLUGIN_COUNTATOM_H_
 #define _AGG_PLUGIN_COUNTATOM_H_
 
-#include <dlvhex/PluginInterface.h>
 #include "AggAtom.h"
+
+#include <dlvhex/Interpretation.hpp>
+//#include <dlvhex/PluginInterface.h>
 
 namespace dlvhex {
   namespace aggregate {
@@ -10,16 +12,12 @@ namespace dlvhex {
 	/**
 	 * @brief Count Aggregate Atom.
 	 */
-	class CountAtom : public AggAtom
-	{
+	class CountAtom : public AggAtom {
 	public:
-
 		CountAtom();
-
+		~CountAtom();
 	private:
-
-		virtual void
-		calculateAggfun(Term&) const;
+		virtual ID calculateAggfun(InterpretationConstPtr, const Tuple&) const;
 	};
 
   }
