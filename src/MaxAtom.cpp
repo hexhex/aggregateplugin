@@ -1,6 +1,8 @@
 
 #include "MaxAtom.h"
 
+#include <dlvhex2/Term.h>
+#include <dlvhex2/Registry.h>
 #include <dlvhex2/Interpretation.h>
 //#include <bm.h>
 
@@ -13,25 +15,35 @@ namespace dlvhex {
 
 	ID MaxAtom::calculateAggfun(InterpretationConstPtr interp, 
 								  const Tuple& input) 			 const {
-		/*
+		
 		Registry& registry = interp->get()->getRegistry()->get();
-		Storage storage = interp->get()->getStorage();
+		
+		int maskPos = -1;
+		for (int i=0; i<input.size(); i++) {
+			if (input[i] == registry.terms.getIDByString(MASKTERM)) {
+				maskPos = i;
+				break;
+			}
+		}
+		assert(maskPos != -1);
+		
+		std::string max = "";
 		
 		int pos = storage.get_first();
 		do {
-			
-			// TODO
-			
-			
+			const OrdinaryAtom& oatom = registry.ogatoms.getByAddress(pos);
+			ID curid = oatom.tuple[maskPos]; 
+			std::string cur = registry.getTermStringByID(curid);
+			if (cur > max) {
+				max = cur;
+			}
 			pos = storage.get_next(pos);
 		} 
 		while (pos != 0);
-		*/
-		// TODO: remove
-		int count = interp.get()->getStorage().count();
-		LOG(DBG, "CountAtom::calculateAggfun: count = " << count);
-		ID id = ID::termFromInteger(count); 
-		LOG(DBG, "CountAtom::calculateAggfun: id = " << id);
+		
+		Term t = Term(ID::MAINKIND_TERM | ID::SUBKIND_TERM_CONSTANT, max);
+		ID id = registry.storeTerm(t);
+		
 		return id;
 	}	
 	
