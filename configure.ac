@@ -1,11 +1,8 @@
 
 AC_PREREQ([2.61])
 AC_INIT([dlvhex-aggregateplugin],[2.0.0],[dlvhex-devel@lists.sourceforge.net])
-
-# this refers to one of the sources, change it if you renamed the file
 AC_CONFIG_SRCDIR([src/AggPlugin.cpp])
-
-AC_CONFIG_HEADER([src/config.h])
+AC_CONFIG_HEADERS([src/config.h])
 
 # for documentation of the versioning scheme see
 # https://sourceforge.net/apps/trac/dlvhex/wiki/LibraryVersions
@@ -45,19 +42,6 @@ AC_PROG_LIBTOOL
 # check for other libraries here
 #
 
-# doxygen stuff
-#
-# these are the defaults, can be overridden by --enable-doxygen-...
-DX_HTML_FEATURE([ON])
-DX_CHM_FEATURE([OFF])
-DX_CHI_FEATURE([OFF])
-DX_MAN_FEATURE([OFF])
-DX_RTF_FEATURE([OFF])
-DX_XML_FEATURE([OFF])
-DX_PDF_FEATURE([OFF])
-DX_PS_FEATURE([OFF])
-DX_INIT_DOXYGEN([dlvhex], [doxygen.cfg], [doc])
-
 # check for dlvhex, sets various variables
 DLVHEX_REQUIRE([2.0.0])
 
@@ -67,18 +51,18 @@ BOOST_SMART_PTR
 BOOST_STRING_ALGO
 BOOST_TOKENIZER
 
-#
 # where the plugin will be installed by default.
 # running configure will take sysplugindir from dlvhex.pc,
 # running configure --enable-userinstall will take homeplugindir.
-#
-
 AC_ARG_ENABLE(userinstall, 
              [  --enable-userinstall    Install plugin into home directory],
              [plugindir=$HOME/$DLVHEX_USERPLUGINDIR],
              [plugindir=$DLVHEX_SYSPLUGINDIR]
              )
 AC_SUBST([plugindir])
+if test "x$plugindir" == "x"; then
+	AC_MSG_ERROR([Cannot determine nonempty value for plugindir!])
+fi
 
 #
 # all needed makefiles
@@ -114,4 +98,3 @@ $PACKAGE_TARNAME $PACKAGE_VERSION configuration:
  prefix: $prefix
  plugindir: $plugindir
 EOF
-
