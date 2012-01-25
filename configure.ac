@@ -23,7 +23,7 @@ esac
 
 # Checks for programs.
 AC_PROG_CXX
-AC_PROG_CC
+AC_LANG([C++])
 
 # Checks for header files.
 AC_HEADER_DIRENT
@@ -34,7 +34,7 @@ AC_HEADER_STDBOOL
 AC_C_CONST
 
 # Checks for library functions.
-AC_LIBTOOL_DLOPEN
+AC_LIBTOOL_DLOPEN # we build a module library
 AC_DISABLE_STATIC # we don't need a static library
 AC_PROG_LIBTOOL
 
