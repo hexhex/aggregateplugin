@@ -28,11 +28,11 @@
  * 
  */
 
-#include "AggPlugin.h"
-
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+
+#include "AggPlugin.h"
 
 // #include "dlvhex/PrintVisitor.h"
 
@@ -46,8 +46,8 @@ namespace dlvhex {
   namespace aggregate {
 
 	AggregatePlugin::AggregatePlugin() {
-		setNameVersion(PACKAGE_TARNAME, AGGREGATEPLUGIN_MAJOR, 
-			AGGREGATEPLUGIN_MINOR, AGGREGATEPLUGIN_MICRO);
+		setNameVersion(PACKAGE_TARNAME, AGGREGATEPLUGIN_VERSION_MAJOR, 
+			AGGREGATEPLUGIN_VERSION_MINOR, AGGREGATEPLUGIN_VERSION_MICRO);
 	}
 
 	AggregatePlugin::~AggregatePlugin() {
@@ -149,6 +149,8 @@ PLUGINIMPORTFUNCTION()
   return &dlvhex::aggregate::theAggregatePlugin;
 }
 */
+IMPLEMENT_PLUGINABIVERSIONFUNCTION
+
 extern "C"
 void *PLUGINIMPORTFUNCTION() {
 	return reinterpret_cast<void*>(& dlvhex::aggregate::theAggregatePlugin);

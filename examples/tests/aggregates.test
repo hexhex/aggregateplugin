@@ -1,4 +1,4 @@
 example1/count1.hex count1.out
-example2/min1.hex min1.out
-example3/min2.hex min2.out
-example4/minmax1.hex minmax1.out
+#example2/min1.hex min1.out
+#example3/min2.hex min2.out
+#example4/minmax1.hex minmax1.out

@@ -1,8 +1,8 @@
 #ifndef _AGG_PLUGIN_AGGATOM_H_
 #define _AGG_PLUGIN_AGGATOM_H_
 
-#include <dlvhex/PluginInterface.h>
-#include <dlvhex/Term.hpp>
+#include <dlvhex2/PluginInterface.h>
+#include <dlvhex2/Term.h>
 
 namespace dlvhex {
   namespace aggregate {

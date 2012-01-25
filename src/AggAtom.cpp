@@ -1,9 +1,9 @@
 
 #include "AggAtom.h"
 
-#include <dlvhex/Term.hpp>
-#include <dlvhex/Registry.hpp>
-#include <dlvhex/Interpretation.hpp>
+#include <dlvhex2/Term.h>
+#include <dlvhex2/Registry.h>
+#include <dlvhex2/Interpretation.h>
 
 namespace dlvhex {
   namespace aggregate {
@@ -58,12 +58,23 @@ namespace dlvhex {
 			const OrdinaryAtom& oatom = registry.ogatoms.getByAddress(pos);
 			LOG(DBG, "AggAtom::projectInput: ogatom = " << oatom);
 			const Tuple& tuple = oatom.tuple; 
+			bool masktermFound = false;
 			
 			for (int i=0; i<mask.size(); i++) 
 			{
+				// TODO change symbol comparison to ID comparison
 				std::string maskSymbol = registry.getTermStringByID(mask[i]);
 				std::string tupleSymbol = registry.getTermStringByID(tuple[i]);
 				LOG(DBG, "AggAtom::projectInput: tuple[" << i << "] = " << tupleSymbol << ", " << "mask[" << i << "] = " << maskSymbol);
+				if (maskSymbol.compare(MASKTERM.symbol) == 0) {
+					if (masktermFound) {
+						// there is only one maskterm allowed! 
+						PluginError("Only one use of 'mask' allowed!");
+					}
+					else
+						masktermFound = true;
+				} 
+				// remove atoms that don't match non-maskterm-terms
 				if ((maskSymbol.compare(MASKTERM.symbol) != 0) && 
 				    (maskSymbol.compare(tupleSymbol) != 0)         )
 				{

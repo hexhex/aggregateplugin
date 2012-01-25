@@ -37,7 +37,7 @@
 
 #include <string>
 
-#include <dlvhex/PluginInterface.h>
+#include <dlvhex2/PluginInterface.h>
 
 namespace dlvhex {
   namespace aggregate {

@@ -4,7 +4,7 @@
 //#include <dlvhex/PluginInterface.h>
 #include "AggAtom.h"
 
-#include <dlvhex/Interpretation.hpp>
+#include <dlvhex2/Interpretation.h>
 
 namespace dlvhex {
   namespace aggregate {
@@ -17,7 +17,7 @@ namespace dlvhex {
 		MinAtom();
 		~MinAtom();
 	private:
-		virtual ID calculateAggfun(InterpretationConstPtr);
+		virtual ID calculateAggfun(InterpretationConstPtr, const Tuple&) const;
 	};
 
   }

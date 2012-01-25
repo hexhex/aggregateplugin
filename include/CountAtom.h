@@ -3,7 +3,7 @@
 
 #include "AggAtom.h"
 
-#include <dlvhex/Interpretation.hpp>
+#include <dlvhex2/Interpretation.h>
 //#include <dlvhex/PluginInterface.h>
 
 namespace dlvhex {

@@ -15,8 +15,8 @@ TESTS = $(top_srcdir)/testsuite/run-dlvhex-tests.sh
 
 TESTS_ENVIRONMENT = \
         TOP_SRCDIR=$(top_srcdir) \
-        DLVHEX="$(DLVHEX_BINDIR)/dlvhex -s --plugindir=!$(top_builddir)/src" \
+        DLVHEX="$(DLVHEX_BINDIR)/dlvhex2 -s --plugindir=!$(top_builddir)/src/.libs --verbose=255" \
         EXAMPLESDIR=$(top_srcdir)/examples \
         TESTDIR=$(top_builddir)/examples/tests \
         OUTDIR=$(top_srcdir)/examples/tests
-
+        

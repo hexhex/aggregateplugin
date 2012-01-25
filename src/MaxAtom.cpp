@@ -1,8 +1,8 @@
 
 #include "MaxAtom.h"
 
-#include <dlvhex/Interpretation.hpp>
-#include <bm.h>
+#include <dlvhex2/Interpretation.h>
+//#include <bm.h>
 
 namespace dlvhex {
   namespace aggregate {
@@ -11,23 +11,31 @@ namespace dlvhex {
 	
 	MaxAtom::~MaxAtom() { }
 
-	ID CountAtom::calculateAggfun(InterpretationConstPtr interp, 
+	ID MaxAtom::calculateAggfun(InterpretationConstPtr interp, 
 								  const Tuple& input) 			 const {
-		
+		/*
 		Registry& registry = interp->get()->getRegistry()->get();
 		Storage storage = interp->get()->getStorage();
-		Storage::enumerator en = storage->first();
 		
-		while (en.value() < storage.size()) {
+		int pos = storage.get_first();
+		do {
 			
 			// TODO
 			
 			
-			
-			en++;
-		}
+			pos = storage.get_next(pos);
+		} 
+		while (pos != 0);
+		*/
+		// TODO: remove
+		int count = interp.get()->getStorage().count();
+		LOG(DBG, "CountAtom::calculateAggfun: count = " << count);
+		ID id = ID::termFromInteger(count); 
+		LOG(DBG, "CountAtom::calculateAggfun: id = " << id);
+		return id;
 	}	
 	
+	/*
 	void 
 	MaxAtom::calculateAggfun(Term& t) const
 	{
@@ -58,7 +66,7 @@ namespace dlvhex {
 		}
 
 		t = max;
-	}
+	} */
 
   }
 }
