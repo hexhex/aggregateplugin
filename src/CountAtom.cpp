@@ -1,9 +1,6 @@
 
 #include "CountAtom.h"
 
-#include <dlvhex2/Interpretation.h>
-#include <boost/lexical_cast.hpp>
-
 namespace dlvhex {
   namespace aggregate {
 

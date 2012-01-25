@@ -34,13 +34,9 @@
 
 #include "AggPlugin.h"
 
-// #include "dlvhex/PrintVisitor.h"
-
 //#include "MinAtom.h"
-//#include "MaxAtom.h"
+#include "MaxAtom.h"
 #include "CountAtom.h"
-
-// #include <iostream>
 
 namespace dlvhex {
   namespace aggregate {
@@ -48,6 +44,7 @@ namespace dlvhex {
 	AggregatePlugin::AggregatePlugin() {
 		setNameVersion(PACKAGE_TARNAME, AGGREGATEPLUGIN_VERSION_MAJOR, 
 			AGGREGATEPLUGIN_VERSION_MINOR, AGGREGATEPLUGIN_VERSION_MICRO);
+		LOG(DBG, "AggregatePlugin::AggregatePlugin");
 	}
 
 	AggregatePlugin::~AggregatePlugin() {
@@ -55,6 +52,7 @@ namespace dlvhex {
 	}
 
 	std::vector<PluginAtomPtr> AggregatePlugin::createAtoms(ProgramCtx&) const {
+		LOG(DBG, "AggregatePlugin::createAtoms");
 		std::vector<PluginAtomPtr> ret;
 		//ret.push_back(PluginAtomPtr(new MinAtom, PluginPtrDeleter<PluginAtom>()));
 		//ret.push_back(PluginAtomPtr(new MaxAtom, PluginPtrDeleter<PluginAtom>()));
@@ -62,93 +60,11 @@ namespace dlvhex {
 		return ret;
 	}
 
-	/*
-	void
-	AggregatePlugin::getAtoms(AtomFunctionMap& a)
-	{
-	  boost::shared_ptr<PluginAtom> min(new MinAtom);
-	  boost::shared_ptr<PluginAtom> max(new MaxAtom);
-	  boost::shared_ptr<PluginAtom> count(new CountAtom);
-	  a["min"] = min;
-	  a["max"] = max;
-	  a["count"] = count;
-	}
-	*/
-
-	/*
-	void
-	AggregatePlugin::setOptions(bool doHelp, std::vector<std::string>& argv, std::ostream& out)
-	{
-		if (doHelp)
-		{
-			out << "some-plugin: " << std::endl << std::endl;
-			out << " --myswitch=FOO       Use FOO as bar." << std::endl;
-			out << " --anotherone         Turn off light." << std::endl;
-			return;
-		}
-
-		std::vector<std::vector<std::string>::iterator> found;
-
-		//
-		// go through options that were left from dlvhex-main()
-		//
-		for (std::vector<std::string>::iterator it = argv.begin();
-				it != argv.end();
-				it++)
-		{
-			std::string::size_type o;
-
-			o = it->find("--myswitch=");
-
-			if (o != std::string::npos)
-			{
-				std::string option = it->substr(o + 11); // length of parameter = 11
-
-				//
-				// do something with this option
-				//
-
-				// remember to delete it from list:
-				found.push_back(it);
-			}
-
-			o = it->find("--anotherone");
-
-			//
-			// process second switch...
-			//
-		}
-
-		//
-		// delete all found options, dlvhex would complain about them!
-		// 
-		for (std::vector<std::vector<std::string>::iterator>::const_iterator it = found.begin();
-			it != found.end(); ++it)
-		{
-			argv.erase(*it);
-		}
-	}
-	*/
-
-
 	AggregatePlugin theAggregatePlugin;
 
   } // namespace aggregate
 } // namespace dlvhex
 
-/*
-extern "C"
-dlvhex::aggregate::AggregatePlugin*
-PLUGINIMPORTFUNCTION()
-{
-  dlvhex::aggregate::theAggregatePlugin.setPluginName(PACKAGE_TARNAME);
-  dlvhex::aggregate::theAggregatePlugin.setVersion(AGGREGATEPLUGIN_MAJOR,
-						   AGGREGATEPLUGIN_MINOR,
-						   AGGREGATEPLUGIN_MICRO);
-
-  return &dlvhex::aggregate::theAggregatePlugin;
-}
-*/
 IMPLEMENT_PLUGINABIVERSIONFUNCTION
 
 extern "C"

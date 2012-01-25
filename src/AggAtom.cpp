@@ -84,6 +84,7 @@ namespace dlvhex {
 				}
 			}
 			pos = interp2.get()->getStorage().get_next(pos);
+			assert(masktermFound == true); // TODO
 		}
 		while (pos != 0);
 		

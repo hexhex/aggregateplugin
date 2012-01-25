@@ -20,11 +20,6 @@ namespace dlvhex {
 	protected:
 
 		/**
-		 * @brief Extension of input predicate after masking.
-		 */
-		//AtomSet projection;
-
-		/**
 		 * @brief Constant mask term for projecting the input extension.
 		 */
 		const Term MASKTERM;
@@ -39,8 +34,6 @@ namespace dlvhex {
 		/**
 		 * @brief Reduction of input predicate extension to non-masked arguments.
 		 */
-		//void
-		//projectInput(const AtomSet&, const Tuple&);
 		InterpretationConstPtr projectInput(const InterpretationConstPtr, const Tuple&);
 	};
 

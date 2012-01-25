@@ -44,15 +44,6 @@ namespace dlvhex {
 
 	class AggregatePlugin : public PluginInterface {
 	public:
-
-		/*
-		virtual void
-		getAtoms(AtomFunctionMap& a);
-
-		void
-		setOptions(bool doHelp, std::vector<std::string>& argv, std::ostream& out);
-		*/
-
 		AggregatePlugin();
 		~AggregatePlugin(); 
 		std::vector<PluginAtomPtr> createAtoms(ProgramCtx&) const;
