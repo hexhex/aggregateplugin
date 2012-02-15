@@ -23,6 +23,7 @@ namespace dlvhex {
 		 * @brief Constant mask term for projecting the input extension.
 		 */
 		const Term MASKTERM;
+		const int numberMaskTermAllowed;
 
 	private:
 

@@ -34,7 +34,7 @@
 
 #include "AggPlugin.h"
 
-//#include "MinAtom.h"
+#include "MinAtom.h"
 #include "MaxAtom.h"
 #include "CountAtom.h"
 
@@ -54,8 +54,8 @@ namespace dlvhex {
 	std::vector<PluginAtomPtr> AggregatePlugin::createAtoms(ProgramCtx&) const {
 		LOG(DBG, "AggregatePlugin::createAtoms");
 		std::vector<PluginAtomPtr> ret;
-		//ret.push_back(PluginAtomPtr(new MinAtom, PluginPtrDeleter<PluginAtom>()));
-		//ret.push_back(PluginAtomPtr(new MaxAtom, PluginPtrDeleter<PluginAtom>()));
+		ret.push_back(PluginAtomPtr(new MinAtom, PluginPtrDeleter<PluginAtom>()));
+		ret.push_back(PluginAtomPtr(new MaxAtom, PluginPtrDeleter<PluginAtom>()));
 		ret.push_back(PluginAtomPtr(new CountAtom, PluginPtrDeleter<PluginAtom>()));
 		return ret;
 	}
