@@ -1,8 +1,10 @@
-min(X) :- &min[p,mask,e,mask](X).
-max(X) :- &max[p,y,mask,mask](X).
-p(y,e,r).
-p(b,f,u).
-p(y,e,a).
-q(e).
-q(f).
-g(u).
+count(X) :- &count[p,a,b,mask](X).
+min(X) :- &min[p,a,b,mask](X).
+max(X) :- &max[p,a,b,mask](X).
+p(a,b,one).
+p(a,b,two).
+p(a,b,three).
+p(a,b,four).
+s(a,b,one).
+p(a,c,one).
+p(x,b,one).
