@@ -1,0 +1,5 @@
+count(X) :- &count[p,a,b](X).
+p(a,c).
+p(d,b).
+p(x,y).
+p(a,b).

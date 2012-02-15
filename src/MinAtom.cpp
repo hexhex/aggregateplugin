@@ -23,7 +23,11 @@ namespace dlvhex {
 				break;
 			}
 		}
-		assert(maskPos != -1);
+		if (maskPos == -1) {
+			std::stringstream errmsgSS;
+			errmsgSS << "There was no occurrence of " << MASKTERM.symbol << "!";
+			throw PluginError(errmsgSS.str());
+		}
 		
 		std::string min = "";
 		

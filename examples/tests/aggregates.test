@@ -3,4 +3,6 @@ example2/min1.hex min1.out
 example3/min2.hex min2.stderr
 example4/minmax1.hex minmax1.out
 example5/max1.hex max1.out
-#example6/nomask.hex nomask.out
+example6/nomask_min.hex nomask_min.stderr
+example7/nomask_max.hex nomask_max.stderr
+example8/nomask_count.hex nomask_count.out
