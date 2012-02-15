@@ -69,17 +69,19 @@ namespace dlvhex {
 			const Tuple& tuple = oatom.tuple; 
 			
 			int masktermCount = 0;
+			ID masktermID = registry.storeTerm(MASKTERM); 
 			
 			for (int i=0; i<mask.size(); i++) 
 			{
 				// TODO change symbol comparison to ID comparison
-				std::string maskSymbol = registry.getTermStringByID(mask[i]);
-				std::string tupleSymbol = registry.getTermStringByID(tuple[i]);
+				//std::string maskSymbol = registry.getTermStringByID(mask[i]);
+				//std::string tupleSymbol = registry.getTermStringByID(tuple[i]);
 				
-				LOG(DBG, "AggAtom::projectInput: tuple[" << i << "] = " 
-					<< tupleSymbol << ", " << "mask[" << i << "] = " << maskSymbol);
+				//LOG(DBG, "AggAtom::projectInput: tuple[" << i << "] = " 
+				//	<< tupleSymbol << ", " << "mask[" << i << "] = " << maskSymbol);
 				
-				if (maskSymbol.compare(MASKTERM.symbol) == 0) 
+				//if (maskSymbol.compare(MASKTERM.symbol) == 0) 
+				if (mask[i] == masktermID)
 				{	
 					if (masktermCount >= numberMaskTermAllowed) 
 					{
@@ -98,17 +100,15 @@ namespace dlvhex {
 				} 
 				
 				// remove atoms that don't match non-maskterm-terms
-				if ((maskSymbol.compare(MASKTERM.symbol) != 0) && 
-				    (maskSymbol.compare(tupleSymbol) != 0)         )
+				//if ((maskSymbol.compare(MASKTERM.symbol) != 0) && 
+				//    (maskSymbol.compare(tupleSymbol) != 0)         )
+				if ((mask[i] != masktermID) && (mask[i] != tuple[i]))
 				{
 					LOG(DBG, "AggAtom::projectInput: clearing fact!");
 					interp2.get()->clearFact(pos);
 				}
 			}
 			pos = interp2.get()->getStorage().get_next(pos);
-			
-			LOG(DBG, "AggAtom::projectInput: masktermCount = " << masktermCount);
-			assert (masktermCount <= numberMaskTermAllowed); // TODO
 		}
 		while (pos != 0);
 		

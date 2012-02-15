@@ -1,10 +1,7 @@
 
 #include "MaxAtom.h"
 
-#include <dlvhex2/Term.h>
 #include <dlvhex2/Registry.h>
-//#include <dlvhex2/Interpretation.h>
-//#include <bm.h>
 
 namespace dlvhex {
   namespace aggregate {
@@ -28,7 +25,7 @@ namespace dlvhex {
 		}
 		if (maskPos == -1) {
 			std::stringstream errmsgSS;
-			errmsgSS << "There was no occurrence of " << MASKTERM.symbol << "!";
+			errmsgSS << "There was no occurrence of '" << MASKTERM.symbol << "'!";
 			throw PluginError(errmsgSS.str());
 		}
 		
@@ -52,40 +49,7 @@ namespace dlvhex {
 		ID id = registry.storeTerm(t);
 		
 		return id;
-	}	
-	
-	/*
-	void 
-	MaxAtom::calculateAggfun(Term& t) const
-	{
-		// hack: start with variable
-		Term max("X");
-
-		AtomSet::const_iterator cur = projection.begin();
-		AtomSet::const_iterator last = projection.end();
-
-		//
-		// go through all atoms of the interpretation
-		//
-		while (cur != last)
-		{
-			Atom a = *cur;
-
-			for (Tuple::size_type pos = 1; pos <= a.getArity(); pos++)
-			{
-				// first term - no comparison possible
-				if (max.isVariable())
-					max = a.getArgument(pos);
-				else
-				if (a.getArgument(pos).getString() > max.getString())
-					max = a.getArgument(pos);
-			}
-
-			cur++;
-		}
-
-		t = max;
-	} */
+	}
 
   }
 }
