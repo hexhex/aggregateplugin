@@ -1,0 +1,8 @@
+max(X) :- &max[p,mask,y](X). 
+p(a,y).
+s(b).
+t(z,y).
+p(k,y).
+p(b,y).
+p(z,z).
+p(r,y). 

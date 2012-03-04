@@ -1,7 +1,0 @@
-count(X) :- &count[p,mask,x,mask](X).
-p(a,x,u).
-p(b,x,v).
-p(c,y,w).
-q(e).
-q(f).
-g(u).

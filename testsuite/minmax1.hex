@@ -1,8 +1,0 @@
-min(X) :- &min[p,mask,e,mask](X).
-max(X) :- &max[p,y,mask,mask](X).
-p(y,e,r).
-p(b,f,u).
-p(y,e,a).
-q(e).
-q(f).
-g(u).

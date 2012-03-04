@@ -1,13 +1,18 @@
 
 AC_PREREQ([2.61])
-AC_INIT([dlvhex-aggregateplugin],[1.7.2],[dlvhex-devel@lists.sourceforge.net])
+AC_INIT([dlvhex-aggregateplugin],[2.0.0],[dlvhex-devel@lists.sourceforge.net])
+AC_CONFIG_SRCDIR([src/AggPlugin.cpp])
+AC_CONFIG_HEADERS([src/config.h])
 
-# this refers to one of the sources, change it if you renamed the file
-AC_CONFIG_SRCDIR([src/AggPluginInterface.cpp])
+# for documentation of the versioning scheme see
+# https://sourceforge.net/apps/trac/dlvhex/wiki/LibraryVersions
+DLVHEX_DEFINE_VERSION([AGGREGATEPLUGIN],[$PACKAGE_VERSION])
+DLVHEX_DEFINE_VERSION([DLVHEX_ABI],[7.0.0])
 
-AC_CONFIG_HEADER([src/config.h])
+AM_INIT_AUTOMAKE
 
 AC_CANONICAL_HOST
+
 # by default we look into /opt/local and /sw for include files (macports vs. fink)
 case $host_os in
      darwin*|macosx*)
@@ -16,20 +21,9 @@ case $host_os in
 esac 
 
 
-MAJOR=`echo $PACKAGE_VERSION | sed "s/^\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\1/"`
-MINOR=`echo $PACKAGE_VERSION | sed "s/^\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\2/"`
-MICRO=`echo $PACKAGE_VERSION | sed "s/^\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\3/"`
-
-AC_DEFINE_UNQUOTED([AGGREGATEPLUGIN_MAJOR], [$MAJOR], [Major version number of the aggregate-plugin])
-AC_DEFINE_UNQUOTED([AGGREGATEPLUGIN_MINOR], [$MINOR], [Minor version number of the aggregate-plugin])
-AC_DEFINE_UNQUOTED([AGGREGATEPLUGIN_MICRO], [$MICRO], [Micro version number of the aggregate-plugin])
-
-
-AM_INIT_AUTOMAKE
-
 # Checks for programs.
 AC_PROG_CXX
-AC_PROG_CC
+AC_LANG([C++])
 
 # Checks for header files.
 AC_HEADER_DIRENT
@@ -40,7 +34,7 @@ AC_HEADER_STDBOOL
 AC_C_CONST
 
 # Checks for library functions.
-AC_LIBTOOL_DLOPEN
+AC_LIBTOOL_DLOPEN # we build a module library
 AC_DISABLE_STATIC # we don't need a static library
 AC_PROG_LIBTOOL
 
@@ -48,23 +42,8 @@ AC_PROG_LIBTOOL
 # check for other libraries here
 #
 
-# doxygen stuff
-#
-# these are the defaults, can be overridden by --enable-doxygen-...
-DX_HTML_FEATURE([ON])
-DX_CHM_FEATURE([OFF])
-DX_CHI_FEATURE([OFF])
-DX_MAN_FEATURE([OFF])
-DX_RTF_FEATURE([OFF])
-DX_XML_FEATURE([OFF])
-DX_PDF_FEATURE([OFF])
-DX_PS_FEATURE([OFF])
-DX_INIT_DOXYGEN([dlvhex], [doxygen.cfg], [doc])
-
-#
-# of course we need dlvhex itself!
-#
-PKG_CHECK_MODULES([DLVHEX], [dlvhex >= 1.7])
+# check for dlvhex, sets various variables
+DLVHEX_REQUIRE([2.0.0])
 
 # checking for boost libs
 BOOST_REQUIRE([1.41.0])
@@ -72,18 +51,18 @@ BOOST_SMART_PTR
 BOOST_STRING_ALGO
 BOOST_TOKENIZER
 
-#
 # where the plugin will be installed by default.
 # running configure will take sysplugindir from dlvhex.pc,
 # running configure --enable-userinstall will take homeplugindir.
-#
-
 AC_ARG_ENABLE(userinstall, 
              [  --enable-userinstall    Install plugin into home directory],
-             [plugindir=$HOME/`pkg-config dlvhex --variable=userplugindir`],
-             [plugindir=`pkg-config dlvhex --variable=sysplugindir`]
+             [plugindir=$HOME/$DLVHEX_USERPLUGINDIR],
+             [plugindir=$DLVHEX_SYSPLUGINDIR]
              )
 AC_SUBST([plugindir])
+if test "x$plugindir" == "x"; then
+	AC_MSG_ERROR([Cannot determine nonempty value for plugindir!])
+fi
 
 #
 # all needed makefiles
@@ -92,8 +71,30 @@ AC_CONFIG_FILES([
            Makefile 
            include/Makefile
            src/Makefile
-           testsuite/Makefile
+           examples/Makefile
 ])
 
 AC_OUTPUT
 
+dnl output configuration
+cat <<EOF
+ 
+$PACKAGE_TARNAME $PACKAGE_VERSION configuration:
+
+ - Compiler settings
+ CC: $CC
+ CXX: $CXX
+ CFLAGS: $CFLAGS
+ CPPFLAGS: $CPPFLAGS
+ CXXFLAGS: $CXXFLAGS
+ LDFLAGS: $LDFLAGS
+
+ - from pkg-config
+ DLVHEX_CFLAGS: $DLVHEX_CFLAGS
+ DLVHEX_LIBS: $DLVHEX_LIBS
+ DLVHEX_BINDIR: $DLVHEX_BINDIR
+ 
+ - Path settings
+ prefix: $prefix
+ plugindir: $plugindir
+EOF
