@@ -1,13 +1,21 @@
 EXTRA_DIST = \
-    tests/aggregates.test \
     example1/count1.hex \
-    tests/count1.out \
     example2/min1.hex \
-    tests/min1.out \
     example3/min2.hex \
-    tests/min2.out \
     example4/minmax1.hex \
+    example5/max1.hex \
+    example6/nomask_min.hex \
+    example7/nomask_max.hex \
+    example8/nomask_count.hex \
+    tests/aggregates.test \
+    tests/count1.out \
+    tests/max1.out \
+    tests/min1.out \
+    tests/min2.stderr \
     tests/minmax1.out \
+		tests/nomask_count.out \
+		tests/nomask_max.stderr \
+		tests/nomask_min.stderr \
     ../testsuite/run-dlvhex-tests.sh \
     ../testsuite/answerset_compare.py
 
