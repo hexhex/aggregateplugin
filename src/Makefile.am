@@ -1,11 +1,5 @@
 plugin_LTLIBRARIES = libdlvhexplugin-aggregate.la
 
-check_PROGRAMS = \
-  TestStatic
-
-TestStatic_SOURCES = dummymain.cpp
-TestStatic_LDADD = libdlvhexplugin-aggregate.la $(DLVHEX_LIBS)
-
 libdlvhexplugin_aggregate_la_SOURCES = 	AggPlugin.cpp \
 										AggAtom.cpp \
 										MinAtom.cpp \
