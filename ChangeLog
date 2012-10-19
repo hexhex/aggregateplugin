@@ -1,3 +1,8 @@
+2012-04-29  Peter Schueller  <ps@kr.tuwien.ac.at>
+
+	* src/Makefile.am: Remove static compilation test
+	that does not work with clasp/gringo.
+
 2012-03-11  Peter Schueller  <ps@kr.tuwien.ac.at>
 
 	Release version 2.0.0.
