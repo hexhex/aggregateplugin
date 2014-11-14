@@ -19,7 +19,7 @@ EXTRA_DIST = \
     ../testsuite/run-dlvhex-tests.sh \
     ../testsuite/answerset_compare.py
 
-TESTS = $(top_srcdir)/testsuite/run-dlvhex-tests.sh
+#TESTS = $(top_srcdir)/testsuite/run-dlvhex-tests.sh
 
 TESTS_ENVIRONMENT = \
         TOP_SRCDIR=$(top_srcdir) \
