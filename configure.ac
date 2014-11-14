@@ -1,5 +1,5 @@
 AC_PREREQ([2.61])
-AC_INIT([dlvhex-aggregateplugin],[2.0.0],[dlvhex-devel@lists.sourceforge.net])
+AC_INIT([dlvhex2-aggregateplugin],[2.0.0],[dlvhex-devel@lists.sourceforge.net])
 AC_CONFIG_SRCDIR([src/AggPlugin.cpp])
 AC_CONFIG_HEADERS([src/config.h])
 
